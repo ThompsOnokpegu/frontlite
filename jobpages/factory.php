@@ -1,4 +1,3 @@
-
 <?php // 
 include "includes/process_jobpage_images.php";
 include "includes/update_jobpage_status.php";

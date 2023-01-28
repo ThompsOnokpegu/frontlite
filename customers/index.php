@@ -1,6 +1,4 @@
-
-<?php include "../templates/header.php"; 
-?>
+<?php include "../templates/header.php";?>
     <!-- Main content -->
     <section class="content">
 
@@ -40,4 +38,4 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-<?php include "../templates/footer.php"; ?>
+  <?php include "../templates/footer.php"; ?>

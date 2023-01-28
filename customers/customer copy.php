@@ -1,4 +1,3 @@
-
 <?php 
 include "scripts/read.php";
 include "../templates/header.php";

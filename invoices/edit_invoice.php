@@ -1,4 +1,3 @@
-
 <?php 
 include "includes/print.php";
 include "includes/update.php";

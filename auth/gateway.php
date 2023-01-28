@@ -1,4 +1,3 @@
-
 <?php
 require "../common.php";
 //Access Routes

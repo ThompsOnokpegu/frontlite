@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home4/laztntmy/public_html/frontlite-ebewelebrown-com
+    - /bin/cp -R * $DEPLOYPATH

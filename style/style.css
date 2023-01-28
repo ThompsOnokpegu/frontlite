@@ -1,0 +1,17 @@
+/*OVERRIDE bootstrap and scss*/
+label:not(.form-check-label):not(.custom-file-label) {
+    font-weight: 400 !important;
+}
+
+@media print { 
+    .table th { 
+        background-color: transparent !important; 
+        } 
+    }
+    .teehead,.account{background:#3C7DA5; color:white;}
+    table,address{font-size:18px;}
+    td,th{border-top:1px solid #AAAAAA!important;}
+    @page { margin: .5cm } /* All margins set to .5cm */
+    @page :first {
+        margin-top: 1cm /* Top margin on first page 1cm */
+    }

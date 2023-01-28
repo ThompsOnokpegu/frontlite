@@ -1,0 +1,26 @@
+<?php
+
+require "../config.php";
+require "../common.php";
+//FETCH 1 FROM customers table
+if(isset($_GET["customer_id"]))   {
+  try {
+    $connection = new PDO($dsn, $username, $password, $options);
+    $id = $_GET['customer_id'];
+
+    $sql = "SELECT * FROM customers WHERE customer_id = :customer_id";
+    $statement = $connection->prepare($sql);
+    $statement->bindValue(':customer_id', $id);
+    $statement->execute();
+    
+    $customer = $statement->fetch(PDO::FETCH_ASSOC);
+
+  } catch(PDOException $error) {
+      echo $sql . "<br>" . $error->getMessage();
+  }
+} else {
+    echo "Something went wrong!";
+    exit;
+}
+
+?>

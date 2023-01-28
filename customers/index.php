@@ -1,8 +1,4 @@
-<?php 
-if(!$_SESSION['role']==='office'){
-  header('Location: '. $_SERVER['HTTP_REFERER']);
-}
-include "../templates/header.php";?>
+<?php include "../templates/header.php";?>
     <!-- Main content -->
     <section class="content">
 

@@ -51,8 +51,8 @@ $(document).ready(function(){
          {data:'client'},
          {data:'amount'},
          {data:'deposit'},
-         {data:61},
          {data:62},
+         {data:63},
          
        ],
        responsive:true,

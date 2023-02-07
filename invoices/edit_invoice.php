@@ -1,4 +1,4 @@
-<?php 
+<?php
 include "includes/print.php";
 include "includes/update.php";
 include "../templates/header.php"; 
@@ -6,6 +6,16 @@ $des = json_decode($invoice['descriptions'], true);
 $price = json_decode($invoice['prices'],true);
 $owner = json_decode($invoice['owners'],true);
 $qty = json_decode($invoice['quantities'],true);
+
+$bforward = $invoice['bbf'];
+if($bforward==0){
+	$bbf = 0;
+}else{
+	$bforward=json_decode($invoice['bbf'],true);
+	$bbf_invoice_id = escape($bforward['invoice']);
+    $bbf = escape($bforward['balance']);
+}
+
 ?>
 <!-- Main content -->
 <section class="content">
@@ -27,7 +37,7 @@ $qty = json_decode($invoice['quantities'],true);
 			<div class="card-header">
               <div class="row">
                 <div class="col-md-6">
-				<h5>Update <strong><?php echo $invoice['firstname']." (".$invoice['customer_id'].")";?></strong> Invoice</h5>
+				<h5>Updating <strong><?php echo "#". $invoice['invoice_id'];?></strong><?php echo " for ".$invoice['firstname'];?></h5>
                 </div>
                 <div class="col-md-6">
                 </div>
@@ -40,10 +50,10 @@ $qty = json_decode($invoice['quantities'],true);
 		<div class="col-md-12 column">
 			<form method="post" name="cart">
 			<input name="csrf" type="hidden" value="<?php echo escape($_SESSION['csrf']); ?>">	 
-			<table name="cart" class="table table-bordered table-hover table-sm" id="tab_logic">
-				<thead>
+			<table name="cart" class="table table-hover table-sm" id="tab_logic">
+				<thea>
 					<tr>
-						<td colspan="6" style="background:#dee2e6;">
+						<td colspan="6" style="padding-right: 0.5em;">
 							<div class="form-row">
 								<div class="form-group col-md-2 col-sm-12">
 									<label>Deposit (₦)</label>
@@ -57,8 +67,8 @@ $qty = json_decode($invoice['quantities'],true);
 									<label>Shipping (₦)</label>
 									<input type="number" name="shipping" value="<?php echo escape($invoice['shipping']); ?>"  class="form-control" placeholder="24000" required>
 								</div>
-								<div class="form-group col-md-3 col-sm-12">
-									<label>Mode of Payment</label>
+								<div class="form-group col-md-2 col-sm-12">
+									<label>Payment</label>
 									<select class="custom-select" name="mode_of_payment" required>
 										<option>
 										<option <?php if(escape($invoice['mode_of_payment'])=="Cash") echo "selected='selected'";?> value="Cash">Cash</option>
@@ -72,15 +82,18 @@ $qty = json_decode($invoice['quantities'],true);
 										<option <?php if(escape($invoice['mode_of_payment'])=="Cheque") echo "selected='selected'"; ?>value="Cheque">Cheque</option>
 									</select>
 								</div>
-								<div class="form-group col-md-3 col-sm-12">
-									<div class="form-check">
-										<input hidden type="text" name="bal" id="bal" value="<?php echo escape($invoice['bbf']);?>">
-										<input class="form-check-input" type="checkbox" value="" id="old_balance" name="old_balance" checked disabled>
-										<label class="form-check-label" for="defaultCheck1">Balance brought forward: <strong style="color:red">₦<?php echo number_format($invoice['bbf'],2);?></strong>
-										<!-- <input style="color:red;" name="old_bal" id="old_bal" type="hidden" value="">	 -->
-										</label>	
-									</div>
-								</div>
+								
+									<input type="hidden" name="bal" id="bal" value="<?php echo escape($bbf);?>">							
+									<?php if($bforward!=0){?>
+										<div class="form-group col-md-4 col-sm-12 callout callout-danger" style="padding-right:0.5rem;">
+										<span>Includes outstanding balance: 
+											<strong style="color:red">₦<?php echo number_format($bbf,2);?> 
+											</strong>
+											<br>from <a href='#'><?php echo $bbf_invoice_id;?></a>
+										</span>
+										</div>
+									<?php }?>
+								
 							</div>
 						</td>
 					</tr>
@@ -95,7 +108,7 @@ $qty = json_decode($invoice['quantities'],true);
 							Owner
 						</th>
 						<th width="10%"class="text-center">
-							Quantity
+							QTY/Set
 						</th>
 						<th width="15%"class="text-center">
 							Unit Price(₦)
@@ -121,7 +134,7 @@ $qty = json_decode($invoice['quantities'],true);
                           </select>
 						</td>
 						<td>
-						<input type="number" name='qty1' value="<?php echo escape($qty['qty1']) ?>" placeholder='1' class="form-control" required/>
+						<input type="number" name='qty1' value="<?php echo escape($qty['qty1']) ?>" placeholder='0' class="form-control" required/>
 						</td>
 						<td>
 						<input type="number" name='price1' value="<?php echo escape($price['price1']) ?>" placeholder='0.00' class="form-control" required/>
@@ -145,7 +158,7 @@ $qty = json_decode($invoice['quantities'],true);
                           </select>
 						</td>
 						<td>
-						<input type="number" name='qty2' value="<?php echo escape($qty['qty2']) ?>" placeholder='1' class="form-control"/>
+						<input type="number" name='qty2' value="<?php echo escape($qty['qty2']) ?>" placeholder='0' class="form-control"/>
 						</td>
 						<td>
 						<input type="number" name='price2' value="<?php echo escape($price['price2']) ?>" placeholder='0.00' class="form-control"/>
@@ -169,7 +182,7 @@ $qty = json_decode($invoice['quantities'],true);
                           </select>
 						</td>
 						<td>
-						<input type="number" name='qty3' value="<?php echo escape($qty['qty3']) ?>" placeholder='1' class="form-control"/>
+						<input type="number" name='qty3' value="<?php echo escape($qty['qty3']) ?>" placeholder='0' class="form-control"/>
 						</td>
 						<td>
 						<input type="number" name='price3' value="<?php echo escape($price['price3']) ?>" placeholder='0.00' class="form-control"/>
@@ -193,7 +206,7 @@ $qty = json_decode($invoice['quantities'],true);
                           </select>
 						</td>
 						<td>
-						<input type="number" name='qty4' value="<?php echo escape($qty['qty4']) ?>" placeholder='1' class="form-control"/>
+						<input type="number" name='qty4' value="<?php echo escape($qty['qty4']) ?>" placeholder='0' class="form-control"/>
 						</td>
 						<td>
 						<input type="number" name='price4' value="<?php echo escape($price['price4']) ?>" placeholder='0.00' class="form-control"/>
@@ -217,7 +230,7 @@ $qty = json_decode($invoice['quantities'],true);
                           </select>
 						</td>
 						<td>
-						<input type="number" name='qty5' value="<?php echo escape($qty['qty5']) ?>" placeholder='1' class="form-control"/>
+						<input type="number" name='qty5' value="<?php echo escape($qty['qty5']) ?>" placeholder='0' class="form-control"/>
 						</td>
 						<td>
 						<input type="number" name='price5' value="<?php echo escape($price['price5']) ?>" placeholder='0.00' class="form-control"/>
@@ -241,7 +254,7 @@ $qty = json_decode($invoice['quantities'],true);
                           </select>
 						</td>
 						<td>
-						<input type="number" name='qty6' value="<?php echo escape($qty['qty6']) ?>" placeholder='1' class="form-control"/>
+						<input type="number" name='qty6' value="<?php echo escape($qty['qty6']) ?>" placeholder='0' class="form-control"/>
 						</td>
 						<td>
 						<input type="number" name='price6' value="<?php echo escape($price['price6']) ?>" placeholder='0.00' class="form-control"/>
@@ -265,7 +278,7 @@ $qty = json_decode($invoice['quantities'],true);
                           </select>
 						</td>
 						<td>
-						<input type="number" name='qty7' value="<?php echo escape($qty['qty7']) ?>" placeholder='1' class="form-control"/>
+						<input type="number" name='qty7' value="<?php echo escape($qty['qty7']) ?>" placeholder='0' class="form-control"/>
 						</td>
 						<td>
 						<input type="number" name='price7' value="<?php echo escape($price['price7']) ?>" placeholder='0.00' class="form-control"/>
@@ -293,7 +306,7 @@ $qty = json_decode($invoice['quantities'],true);
 					<tr>
 						<td colspan="4">&nbsp;</td>
 						<td>Grand Total</td>
-						<td><input type="text" class="form-control" name="grand_total" value="" jAutoCalc="{sub_total} + {tax_total}+{shipping}+{bal}"></td>
+						<td><input type="text" class="form-control" name="grand_total" value="" jAutoCalc="{sub_total} + {tax_total} + {shipping} + {bal}"></td>
 					</tr>
 					<tr>
 						<td colspan="4"></td>

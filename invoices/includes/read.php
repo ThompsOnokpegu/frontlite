@@ -1,4 +1,6 @@
 <?php
+require "../config.php";
+require "../common.php";
 $count = 0;
 //get invoice_id
 $bbf_invoice = "none";

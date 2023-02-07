@@ -47,17 +47,40 @@ if (isset($_POST['save_invoice'])) {
     $price = json_encode($prices);
     $owner = json_encode($owners);
   
+
+    //get deposit amount
+    $new_deposit = $_POST['deposit'];
+    $needs_update = False;
+    $bbf=$invoice['bbf'];//bbf when this invoice was created
+    $bbf_outstanding = 0; //balance
+    if($bbf!=0){
+      $bbf = json_decode($invoice['bbf']);
+      $bbf_invoice_id = $bbf['invoice'];
+      $bbf_outstanding = $bbf['balance']; 
+      //deposit > outstanding balance?
+      if($new_deposit > $bbf_outstanding){
+        //set outstanding balance and the associated invoice_id to the new invoice->bbf
+        $bbf = array("balance"=>$bbf_outstanding,"invoice"=>$bbf_invoice_id);
+        $bbf_outstanding = json_encode($bbf);
+      }else{
+        //deposit < outstanding balance?
+        //raise alert: deposit is not enough to settle outstanding balance
+        $bbf_error = True;
+        $bbf_message = "The deposited amount is not enough to settle outstanding balance.";
+      } 
+    }
+
     /*end ground work*/
     
     $invoice = array(
       "invoice_id" => escape($_GET["invoice_ref"]),
-      "customer"  => $invoice['customer_id'],//read from read.php in create.php
+      "customer"  => $invoice['customer_id'],//read from print.php
       "descriptions" => $description,
       "owners" => $owner,
       "quantities" => $quantity,
       "prices" => $price,
       "amount" => str_replace( ',', '', $_POST['grand_total']),
-      "bbf" => $_POST['bal'],
+      "bbf" => $bbf_outstanding,
       "deposit"  => $_POST['deposit'],
       "discount"     => $_POST['discount'],
       "shipping" => $_POST['shipping'],

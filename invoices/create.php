@@ -1,5 +1,5 @@
 <?php 
-include "../customers/scripts/read.php";
+// include "../customers/scripts/read.php";
 include "includes/read.php";
 include "includes/process.php";
 include "../templates/header.php"; 
@@ -96,7 +96,7 @@ $_SESSION['jobpages'] = $jobpages;
 							Owner
 						</th>
 						<th width="10%"class="text-center">
-							Qty
+							Qty/Set
 						</th>
 						<th width="15%"class="text-center">
 							Price(₦)

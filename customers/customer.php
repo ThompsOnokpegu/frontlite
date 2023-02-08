@@ -329,8 +329,8 @@ if(isset($_POST['submit_multiple_jobpages'])){
                           <th>Invoice ID</th>
                           <th>Amount</th>
                           <th>Deposit</th>
-                          <th>Print Invoice</th>
-                          <th>Edit Invoice</th>
+                          <th>Print</th>
+                          <th>Edit</th>
                         </tr>
                       </thead>
                     </table>

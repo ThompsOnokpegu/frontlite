@@ -86,7 +86,7 @@ $(document).ready(function(x){
 $(document).ready(function(){
   $("#customer_invoices").DataTable({
         ajax:{
-          url:'../invoices/includes/customer_invoices.php',
+          url:'scripts/customer_invoices.php',
           dataSrc:''
         },
         columns:[
@@ -95,7 +95,7 @@ $(document).ready(function(){
           {data:'deposit'},
           {data:17},
           {data:18},
-          
+ 
         ],
         responsive:true,
         paging: true,

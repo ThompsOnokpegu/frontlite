@@ -6,7 +6,7 @@ require "../../common.php";
 try {
   $connection = new PDO($dsn, $username, $password, $options);
   $customer = $_SESSION['my_customer'];
-  $sql = "SELECT * FROM invoices WHERE customer = '$customer' ORDER BY invoice_id LIMIT 5";
+  $sql = "SELECT * FROM invoices WHERE customer = '$customer'";
 
   $statement = $connection->prepare($sql);
   $statement->execute();

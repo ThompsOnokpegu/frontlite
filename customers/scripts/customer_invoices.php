@@ -6,7 +6,7 @@ require "../../common.php";
 try {
   $connection = new PDO($dsn, $username, $password, $options);
   $customer = $_SESSION['my_customer'];
-  $sql = "SELECT * FROM invoices WHERE customer = '$customer'";
+  $sql = "SELECT * FROM invoices WHERE customer = '$customer' ORDER BY invoice_id DESC LIMIT 10";
 
   $statement = $connection->prepare($sql);
   $statement->execute();
@@ -23,7 +23,7 @@ try {
       }
       $amount = str_replace( ',', '', $invoice['amount'] - $bbf );
       
-      array_push($invoice,'<a type="button" class="btn btn-info btn-xs" href="../invoices/print_invoice.php?invoice_ref='.$invoice[0].'&order_id='.$invoice['order_id'].'" target="_blank">Print Invoice</a>');
+      array_push($invoice,'<a type="button" class="btn btn-info btn-xs" href="../invoices/invoice.php?invoice_ref='.$invoice[0].'&order_id='.$invoice['order_id'].'">View Invoice</a>');
       array_push($invoice,'<a type="button" class="btn btn-info btn-xs" href="../invoices/edit_invoice.php?invoice_ref='.$invoice[0].'">Edit Invoice</a>');
       
       $invoice['bbf'] = $bbf;

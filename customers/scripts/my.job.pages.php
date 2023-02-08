@@ -9,7 +9,7 @@ $customer = $_SESSION['my_customer'];
 // $customer=$_GET['customer_id'];
   try {
     $connection = new PDO($dsn, $username, $password, $options);
-    $sql = "SELECT * FROM orders WHERE customer='$customer'";
+    $sql = "SELECT * FROM orders WHERE customer='$customer' ORDER BY order_id DESC";
 
     $statement = $connection->prepare($sql);
     

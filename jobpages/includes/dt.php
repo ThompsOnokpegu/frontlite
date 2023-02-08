@@ -6,7 +6,7 @@ require "../../common.php";
 try {
   $connection = new PDO($dsn, $username, $password, $options);
 
-  $sql = "SELECT * FROM orders JOIN customers WHERE orders.customer = customers.customer_id";
+  $sql = "SELECT * FROM orders JOIN customers WHERE orders.customer = customers.customer_id ORDER BY orders.order_id DESC";
 
   $statement = $connection->prepare($sql);
   $statement->execute();

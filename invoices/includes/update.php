@@ -107,6 +107,7 @@ if (isset($_POST['save_invoice'])) {
   
   $update_statement = $connection->prepare($sql);
   $update_statement->execute($invoice);
+  header("Location: ./invoice.php?invoice_ref=".$invoice['invoice_id']);
   } catch(PDOException $error) {
      displayError($error->getMessage());
   }

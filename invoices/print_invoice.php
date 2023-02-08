@@ -86,7 +86,7 @@
                     <?php echo $invoice['phone'];?><br>
                     <?php echo $invoice['email'];?>
                   </address>
-                  <h3 style="font-weight:300!important;font-size:medium;" ><?php echo "Job Ref: ".$_SESSION['jobpages']; unset($_SESSION['jobpages']);?></h3>
+                 
                 </div>
                 <!-- /.col -->
                 

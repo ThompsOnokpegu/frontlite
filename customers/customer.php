@@ -78,6 +78,7 @@ if(isset($_POST['submit_multiple_jobpages'])){
               <li class="nav-item"><a class="nav-link active" href="#jobpages" data-toggle="tab">Job Pages</a></li>
               <li class="nav-item"><a class="nav-link" href="#measurement" data-toggle="tab">Measurement</a></li>
               <li class="nav-item"><a class="nav-link" href="#editinfo" data-toggle="tab">Edit Info</a></li>
+              <li class="nav-item"><a class="nav-link" href="#invoices" data-toggle="tab">Invoices</a></li>
             </ul>
            
           </div><!-- /.card-header -->
@@ -112,7 +113,7 @@ if(isset($_POST['submit_multiple_jobpages'])){
               </div>
               <!-- /.tab-pane -->
               <div class="tab-pane" id="measurement">
-              <div class="row">
+                <div class="row">
                     <style>
                       #header{
                         font-size: 15px;
@@ -317,6 +318,23 @@ if(isset($_POST['submit_multiple_jobpages'])){
                     </div>
                   </div>
                 </form>
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="invoices">
+                <!-- /.customer-invoices-table -->
+                <div class="card-body table-responsive">
+                    <table id="customer_invoices" class="table table-sm">
+                      <thead>
+                        <tr>
+                          <th>Invoice ID</th>
+                          <th>Amount</th>
+                          <th>Deposit</th>
+                          <th>Print Invoice</th>
+                          <th>Edit Invoice</th>
+                        </tr>
+                      </thead>
+                    </table>
+                </div>
               </div>
               <!-- /.tab-pane -->
             </div>

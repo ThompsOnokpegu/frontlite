@@ -82,7 +82,28 @@ $(document).ready(function(x){
         autoWidth: true,
     }); 
 });
-     
+
+$(document).ready(function(){
+  $("#customer_invoices").DataTable({
+        ajax:{
+          url:'../invoices/includes/customer_invoices.php',
+          dataSrc:''
+        },
+        columns:[
+          {data:'invoice_id'},
+          {data:'amount'},
+          {data:'deposit'},
+          {data:17},
+          {data:18},
+          
+        ],
+        responsive:true,
+        paging: true,
+        scrollY: 400,
+        autoWidth: true,
+ 
+      }); 
+ });
 
 $(document).ready(function(){
   $('input[type="checkbox"]').click(function(){

@@ -99,6 +99,9 @@ if (isset($_POST['submit_jp'])) {
         // Get file info 
         $design_image = basename($_FILES["design_image"]["name"]); 
         $thread_and_fabric = basename($_FILES["thread_and_fabric_image"]["name"]);
+        if(empty($_FILES['design_image']['name']) || empty($_FILES['thread_and_fabric_image']['name'])) {
+          header("Location: ../jobpage.php?order_id=".$order_id."&customer_id=".$_SESSION['customer_id']);
+        }
         $tmp_design = $_FILES['design_image']['tmp_name'];
         $tmp_fabric = $_FILES['thread_and_fabric_image']['tmp_name']; 
         $folder = "../../auth/order_images/" .$order_id."-".$design_image;  

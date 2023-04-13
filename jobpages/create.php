@@ -152,19 +152,19 @@ $_SESSION['calve'] = $customer['calve']
                           <!-- radio -->
                           <div class="form-group clearfix">
                             <div class="icheck-success">
-                              <input type="radio" value="Yes" id="underlay1" name="underlay" required>
+                              <input type="radio" value="Yes" id="underlay1" name="underlay">
                               <label for="underlay1">
                                 YES
                               </label>
                             </div>
                             <div class="icheck-warning">
-                              <input type="radio" value="Subtle" id="underlay2" name="underlay" required>
+                              <input type="radio" value="Subtle" id="underlay2" name="underlay">
                               <label for="underlay2">
                                 SUBTLE
                               </label>
                             </div>
                             <div class="icheck-danger">
-                              <input type="radio" value="No" id="underlay3" name="underlay" required>
+                              <input type="radio" value="No" id="underlay3" name="underlay">
                               <label for="underlay3">
                                 NO
                               </label>
@@ -177,19 +177,19 @@ $_SESSION['calve'] = $customer['calve']
                           <!-- radio -->
                           <div class="form-group clearfix">
                             <div class="icheck-success">
-                              <input type="radio" value="Sokoto" id="pant1" name="pant" required>
+                              <input type="radio" value="Sokoto" id="pant1" name="pant">
                               <label for="pant1">
                                 SOKOTO
                               </label>
                             </div>
                             <div class="icheck-success">
-                              <input type="radio" value="Proper" id="pant2" name="pant" required>
+                              <input type="radio" value="Proper" id="pant2" name="pant">
                               <label for="pant2">
                                 PROPER
                               </label>
                             </div>
                             <div class="icheck-success">
-                              <input type="radio" value="Joggers" id="pant3" name="pant" required>
+                              <input type="radio" value="Joggers" id="pant3" name="pant">
                               <label for="pant3">
                                 JOGGERS
                               </label>
@@ -201,7 +201,7 @@ $_SESSION['calve'] = $customer['calve']
                           <!-- radio -->
                           <div class="form-group clearfix">
                             <div class="icheck-success">
-                              <input type="radio" value="Yes" id="back_pocket1" name="back_pocket" required>
+                              <input type="radio" value="Yes" id="back_pocket1" name="back_pocket">
                               <label for="back_pocket1">
                                 YES
                               </label>
@@ -291,7 +291,7 @@ $_SESSION['calve'] = $customer['calve']
                             <label for="jobpageDesign1">FABRIC & THREAD IMAGE</label>
                             <div class="input-group">
                               <div class="custom-file">
-                                <input type="file" name="thread_and_fabric_image" class="custom-file-input" id="jobpageDesign1" required>
+                                <input type="file" name="thread_and_fabric_image" class="custom-file-input" id="jobpageDesign1">
                                 <label class="custom-file-label input-group-text" for="jobpageDesign1">Choose file</label>
                               </div>
                             </div>
@@ -306,7 +306,7 @@ $_SESSION['calve'] = $customer['calve']
                             <div class="input-group">
                               <div class="custom-file">
                                 <span id="fileTypeError"></span>
-                                <input type="file" name="design_image" class="custom-file-input" id="jobpageDesign2" required>
+                                <input type="file" name="design_image" class="custom-file-input" id="jobpageDesign2">
                                 <label class="custom-file-label input-group-text" for="jobpageDesign2">Choose file</label>
                               </div>
                             </div>

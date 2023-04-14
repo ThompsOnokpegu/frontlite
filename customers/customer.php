@@ -28,8 +28,9 @@ if(isset($_POST['submit_multiple_jobpages'])){
     echo("<script>location.href = '"."../invoices/create.php?order_ids=".implode(",",$invoice_jobpages)."&customer_id=$cus';</script>");
   }
 }
-
+//$customer['dob_month'] = "04"; $customer['dob_day']="25";
 ?>
+
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid">
@@ -45,6 +46,9 @@ if(isset($_POST['submit_multiple_jobpages'])){
             </div>
             <h3 class="profile-username text-center"><?php echo $customer['firstname']." ".$customer['lastname']; ?></h3>
             <p class="text-muted text-center"><?php echo $customer['customer_id'] ?></p>
+            <p class="text-muted text-center"><?php echo calendar_month($customer['dob_month'])." ".$customer['dob_day'];
+              echo ' <small class="badge badge-secondary"><i class="far fa-clock"></i> '.days_to_birth("2000-".$customer['dob_month']."-".$customer['dob_day']).' Days Left</small>';
+            ?></p>
             <hr>
             <div class="text-center">
               <strong><i class="fas fa-address-card mr-1"></i> Contact</strong>
@@ -285,6 +289,66 @@ if(isset($_POST['submit_multiple_jobpages'])){
                     <label class="col-sm-2 col-form-label">Phone Number</label>
                     <div class="col-sm-10">
                       <input type="text" name="phone" value='<?php echo $customer['phone'] ?>' class="form-control" placeholder="Name">
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Date of Birth</label>
+                    <div class="col-sm-10">
+                      <div class="form-row">
+                        <div class="col-6">
+                          
+                          <select name="month" class="custom-select">
+                            <option <?php if(escape($customer['dob_month'])=="01") echo "selected='selected'";?> value="01">January</option>
+                            <option <?php if(escape($customer['dob_month'])=="02") echo "selected='selected'";?> value="02">February</option>
+                            <option <?php if(escape($customer['dob_month'])=="03") echo "selected='selected'";?> value="03">March</option>
+                            <option <?php if(escape($customer['dob_month'])=="04") echo "selected='selected'";?> value="04">April</option>
+                            <option <?php if(escape($customer['dob_month'])=="05") echo "selected='selected'";?> value="05">May</option>
+                            <option <?php if(escape($customer['dob_month'])=="06") echo "selected='selected'";?> value="06">June</option>
+                            <option <?php if(escape($customer['dob_month'])=="07") echo "selected='selected'";?> value="07">July</option>
+                            <option <?php if(escape($customer['dob_month'])=="08") echo "selected='selected'";?> value="08">August</option>
+                            <option <?php if(escape($customer['dob_month'])=="09") echo "selected='selected'";?> value="09">September</option>
+                            <option <?php if(escape($customer['dob_month'])=="10") echo "selected='selected'";?> value="10">October</option>
+                            <option <?php if(escape($customer['dob_month'])=="11") echo "selected='selected'";?> value="11">November</option>
+                            <option <?php if(escape($customer['dob_month'])=="12") echo "selected='selected'";?> value="12">December</option>
+                          </select> 
+                        </div>
+                        <div class="col-6">
+                          <select name="day" class="custom-select">
+                            <option <?php if(escape($customer['dob_day'])=="01") echo "selected='selected'";?> value="01">1</option>
+                            <option <?php if(escape($customer['dob_day'])=="02") echo "selected='selected'";?> value="02">2</option>
+                            <option <?php if(escape($customer['dob_day'])=="03") echo "selected='selected'";?> value="03">3</option>
+                            <option <?php if(escape($customer['dob_day'])=="04") echo "selected='selected'";?> value="04">4</option>
+                            <option <?php if(escape($customer['dob_day'])=="05") echo "selected='selected'";?> value="05">5</option>
+                            <option <?php if(escape($customer['dob_day'])=="06") echo "selected='selected'";?> value="06">6</option>
+                            <option <?php if(escape($customer['dob_day'])=="07") echo "selected='selected'";?> value="07">7</option>
+                            <option <?php if(escape($customer['dob_day'])=="08") echo "selected='selected'";?> value="08">8</option>
+                            <option <?php if(escape($customer['dob_day'])=="09") echo "selected='selected'";?> value="09">9</option>
+                            <option <?php if(escape($customer['dob_day'])=="10") echo "selected='selected'";?> value="10">10</option>
+                            <option <?php if(escape($customer['dob_day'])=="11") echo "selected='selected'";?> value="11">11</option>
+                            <option <?php if(escape($customer['dob_day'])=="12") echo "selected='selected'";?> value="12">12</option>
+                            <option <?php if(escape($customer['dob_day'])=="13") echo "selected='selected'";?> value="13">13</option>
+                            <option <?php if(escape($customer['dob_day'])=="14") echo "selected='selected'";?> value="14">14</option>
+                            <option <?php if(escape($customer['dob_day'])=="15") echo "selected='selected'";?> value="15">15</option>
+                            <option <?php if(escape($customer['dob_day'])=="16") echo "selected='selected'";?> value="16">16</option>
+                            <option <?php if(escape($customer['dob_day'])=="17") echo "selected='selected'";?> value="17">17</option>
+                            <option <?php if(escape($customer['dob_day'])=="18") echo "selected='selected'";?> value="18">18</option>
+                            <option <?php if(escape($customer['dob_day'])=="19") echo "selected='selected'";?> value="19">19</option>
+                            <option <?php if(escape($customer['dob_day'])=="20") echo "selected='selected'";?> value="20">20</option>
+                            <option <?php if(escape($customer['dob_day'])=="21") echo "selected='selected'";?> value="21">21</option>
+                            <option <?php if(escape($customer['dob_day'])=="22") echo "selected='selected'";?> value="22">22</option>
+                            <option <?php if(escape($customer['dob_day'])=="23") echo "selected='selected'";?> value="23">23</option>
+                            <option <?php if(escape($customer['dob_day'])=="24") echo "selected='selected'";?> value="24">24</option>
+                            <option <?php if(escape($customer['dob_day'])=="25") echo "selected='selected'";?> value="25">25</option>
+                            <option <?php if(escape($customer['dob_day'])=="26") echo "selected='selected'";?> value="26">26</option>
+                            <option <?php if(escape($customer['dob_day'])=="27") echo "selected='selected'";?> value="27">27</option>
+                            <option <?php if(escape($customer['dob_day'])=="28") echo "selected='selected'";?> value="28">28</option>
+                            <option <?php if(escape($customer['dob_day'])=="29") echo "selected='selected'";?> value="29">29</option>
+                            <option <?php if(escape($customer['dob_day'])=="30") echo "selected='selected'";?> value="30">30</option>
+                            <option <?php if(escape($customer['dob_day'])=="31") echo "selected='selected'";?> value="31">31</option>
+                          </select>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="form-group row">

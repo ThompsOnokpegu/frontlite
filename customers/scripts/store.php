@@ -18,6 +18,8 @@ if (isset($_POST['submit'])) {
       "lastname"  => $_POST['lastname'],
       "email"     => $_POST['email'],
       "phone"     => $_POST['phone'],
+      "dob_month" => $_POST['month'],
+      "dob_day" => $_POST['day'],
       "country"  => $_POST['country'],
       "city" => $_POST['city'],
       "address_line1" => $_POST['address'],

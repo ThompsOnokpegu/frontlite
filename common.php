@@ -157,3 +157,70 @@ function job_progress($job_status){
   }
   return $level;
 }
+
+
+function days_to_birth(string $date) : int  {
+  if(empty($date))          
+  {
+      return -1;
+  }
+  
+  if($date == '0000-00-00') 
+  {
+      return -1;
+  }
+
+  $ts = strtotime($date.' 00:00:00');
+  $bY = date('Y',$ts);
+  $bm = date('m',$ts);
+  $bd = date('d',$ts);
+
+  $nowY = date('Y');
+  $nowm = date('m');
+  $nowd = date('d');
+
+                          
+  if($bm == $nowm && $bd >= $nowd)                        
+  {
+      return $bd - $nowd;
+  }
+
+  if( ($bm == $nowm && $bd < $nowd) || ($bm < $nowm) )
+  {
+      $nextBirth = ($nowY+1).'-'.$bm.'-'.$bd;
+      $nextBirthTs = strtotime($nextBirth);
+      $diff = $nextBirthTs - time();
+      return floor($diff/(60*60*24));
+  }
+
+  if($bm > $nowm )                        
+  {              
+      $nextBirth = $nowY.'-'.$bm.'-'.$bd.'00:00:00';
+      $diff = strtotime($nextBirth) - time();
+      return floor($diff/(60*60*24));
+  }
+
+  return -1;                                      
+}
+
+function calendar_month($month){
+  $months = array(
+    "01" => "January",
+    "02" => "February",
+    "03" => "March",
+    "04" => "April",
+    "05" => "May",
+    "06" => "June",
+    "07" => "July",
+    "08" => "August",
+    "09" => "September",
+    "10" => "October",
+    "11" => "November",
+    "12" => "December"
+  );
+  foreach ($months as $key => $value) {
+    if($key==$month){
+      return $value;
+    }
+  }
+}

@@ -130,24 +130,7 @@ if(!isset($_SESSION['loggedIn'])){
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-           <?php if($_SESSION['role']==="factory"){ ?>
-            <style>
-              .office{
-                pointer-events:none;
-                color:#555555!important;
-              }
-              </style>
-           <?php } ?>
-
-           <?php if($_SESSION['role']==="office"){ ?>
-            <style>
-              .factory{
-                pointer-events:none;
-                color:#555555!important;
-              }
-              </style>
-           <?php } ?>
-           
+                     
             <a href="/customers" class="nav-link office" aria-disabled="true">
               <i class="nav-icon fas fa-users"></i>
               <p>

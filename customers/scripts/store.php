@@ -11,9 +11,9 @@ if (isset($_POST['submit'])) {
   */
   try {
     $connection = new PDO($dsn, $username, $password, $options);
-
+    $customer_id = getCustomerId($_POST['firstname']);
     $new_customer = array(
-      "customer_id" => getCustomerId($_POST['firstname']),
+      "customer_id" => $customer_id,
       "firstname" => $_POST['firstname'],
       "lastname"  => $_POST['lastname'],
       "email"     => $_POST['email'],
@@ -69,6 +69,7 @@ if (isset($_POST['submit'])) {
       $statement = $connection->prepare($sql);
       if($statement->execute($new_customer)){
         $success = True;
+        header("Location: ../customers/customer.php?customer_id=".escape($customer_id));
       }
     } catch(PDOException $error) {
       echo $sql . "<br>" . $error->getMessage();

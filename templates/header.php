@@ -178,7 +178,7 @@ function dob_days_left(string $date) : int  {
                 foreach($customers_dob as $customer_dob){
                     $days_left = dob_days_left("2000-".$customer_dob['dob_month']."-".$customer_dob['dob_day']);
                     if($days_left <= 10){?>
-                        <a href="#" class="dropdown-item">
+                        <a href="<?php echo "/customers/customer.php?customer_id=".$customer_dob['customer_id']; ?>" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
                             <img class="img-size-50 mr-3 img-circle"

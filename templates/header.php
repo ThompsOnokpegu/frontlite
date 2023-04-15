@@ -1,4 +1,5 @@
 <?php
+include "../config.php";
 //universal function for checking session status-php manual
 function is_session_started(){
     if ( php_sapi_name() !== 'cli' ) {
@@ -15,7 +16,51 @@ if ( is_session_started() === FALSE ) session_start();
 
 if(!isset($_SESSION['loggedIn'])){
     header("Location: ../");
-}?>
+}
+function dob_days_left(string $date) : int  {
+    if(empty($date))          
+    {
+        return -1;
+    }
+    
+    if($date == '0000-00-00') 
+    {
+        return -1;
+    }
+  
+    $ts = strtotime($date.' 00:00:00');
+    $bY = date('Y',$ts);
+    $bm = date('m',$ts);
+    $bd = date('d',$ts);
+  
+    $nowY = date('Y');
+    $nowm = date('m');
+    $nowd = date('d');
+  
+                            
+    if($bm == $nowm && $bd >= $nowd)                        
+    {
+        return $bd - $nowd;
+    }
+  
+    if( ($bm == $nowm && $bd < $nowd) || ($bm < $nowm) )
+    {
+        $nextBirth = ($nowY+1).'-'.$bm.'-'.$bd;
+        $nextBirthTs = strtotime($nextBirth);
+        $diff = $nextBirthTs - time();
+        return floor($diff/(60*60*24));
+    }
+  
+    if($bm > $nowm )                        
+    {              
+        $nextBirth = $nowY.'-'.$bm.'-'.$bd.'00:00:00';
+        $diff = strtotime($nextBirth) - time();
+        return floor($diff/(60*60*24));
+    }
+  
+    return -1;                                      
+  }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,18 +129,62 @@ if(!isset($_SESSION['loggedIn'])){
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+        <?php
+            $dobconnection = new PDO($dsn, $username, $password, $options);
+            $dobsql = "SELECT customer_id,firstname,lastname,dob_month,dob_day FROM customers";
+            $dobstatement = $dobconnection->prepare($dobsql);
+            $dobstatement->execute();
+
+            $customers_dob = $dobstatement->fetchAll(PDO::FETCH_ASSOC);
+        ?>
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i style="margin-right:1rem!important;" class="far fa-comments"></i>
-          <span class="badge badge-danger navbar-badge">0</span>
+          <i style="margin-right:1rem!important;" class="far fa-bell"></i>
+          <?php
+            $dob_count = 0;
+            foreach($customers_dob as $customer_dob){
+                $days = dob_days_left("2000-".$customer_dob['dob_month']."-".$customer_dob['dob_day']);
+                if($days <= 10){
+                    $dob_count++;
+                }
+            }
+          ?>
+          <span class="badge badge-danger navbar-badge"><?php echo $dob_count; ?></span>
         </a>
-        
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <?php
+                foreach($customers_dob as $customer_dob){
+                    $days_left = dob_days_left("2000-".$customer_dob['dob_month']."-".$customer_dob['dob_day']);
+                    if($days_left <= 10){?>
+                        <a href="#" class="dropdown-item">
+                            <!-- Message Start -->
+                            <div class="media">
+                            <img class="img-size-50 mr-3 img-circle"
+                                src="../dist/img/user-avatar.png"
+                                alt="User profile picture">
+                            <div class="media-body">
+                                <h3 class="dropdown-item-title">
+                                <?php echo $customer_dob['firstname']." ".$customer_dob['lastname']; ?>
+                                <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                                </h3>
+                                <p class="text-sm">has birthday celebration</p>
+                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> <?php echo "in ".$days_left." days";?></p>
+                            </div>
+                            </div>
+                            <!-- Message End -->
+                        </a>
+                        <div class="dropdown-divider"></div>    
+                    <?php }
+                }
+            ?> 
+            <a href="#" class="dropdown-item dropdown-footer text-center">See All Birthdays</a>
+        </div>
       </li>
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i style="margin-right:1rem!important;" class="fas fa-bell"></i>
+          <i style="margin-right:1rem!important;" class="fas fa-comments"></i>
           <span class="badge badge-warning navbar-badge">0</span>
         </a>
       </li>

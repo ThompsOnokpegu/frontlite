@@ -190,7 +190,7 @@ function dob_days_left(string $date) : int  {
                                 <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
                                 </h3>
                                 <p class="text-sm">has birthday</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1 text-warning"></i> <?php echo "in ".$days_left." days (".calendar_mon($customer['dob_month'])." ".$customer['dob_day'].")"; ?></p>
+                                <p class="text-sm text-muted"><i class="far fa-clock mr-1 text-warning"></i> <?php echo "in ".$days_left." days (".calendar_mon($customer_dob['dob_month'])." ".$customer_dob['dob_day'].")"; ?></p>
                             </div>
                             </div>
                             <!-- Message End -->

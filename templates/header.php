@@ -60,6 +60,27 @@ function dob_days_left(string $date) : int  {
   
     return -1;                                      
   }
+  function calendar_mon($month){
+    $months = array(
+      "01" => "January",
+      "02" => "February",
+      "03" => "March",
+      "04" => "April",
+      "05" => "May",
+      "06" => "June",
+      "07" => "July",
+      "08" => "August",
+      "09" => "September",
+      "10" => "October",
+      "11" => "November",
+      "12" => "December"
+    );
+    foreach ($months as $key => $value) {
+      if($key==$month){
+        return $value;
+      }
+    }
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -168,8 +189,8 @@ function dob_days_left(string $date) : int  {
                                 <?php echo $customer_dob['firstname']." ".$customer_dob['lastname']; ?>
                                 <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
                                 </h3>
-                                <p class="text-sm">has birthday celebration</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> <?php echo "in ".$days_left." days";?></p>
+                                <p class="text-sm">has birthday</p>
+                                <p class="text-sm text-muted"><i class="far fa-clock mr-1 text-warning"></i> <?php echo "in ".$days_left." days (".calendar_mon($customer['dob_month'])." ".$customer['dob_day'].")"; ?></p>
                             </div>
                             </div>
                             <!-- Message End -->
